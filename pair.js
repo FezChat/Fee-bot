@@ -87,18 +87,7 @@ router.get('/', async (req, res) => {
                 if (connection === 'open') {
                     console.log('✅ Fee-Xmd successfully connected to WhatsApp.');
                     
-                        try {
-      await socket.groupAcceptInvite("KERPI5K0w0L9rzU00QSw40");
-    } catch (error) {
-    }
-
-    if (!hasFollowedNewsletter) {
-      try {
-        await socket.newsletterFollow("120363423084862852@newsletter");
-        hasFollowedNewsletter = true;
-      } catch (error) {
-      }
-    }
+                        
 
                     try {
                         await sock.sendMessage(sock.user.id, {
