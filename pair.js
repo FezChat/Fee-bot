@@ -151,15 +151,12 @@ router.get('/', async (req, res) => {
                         });
 
                         const infoMessage = `  
-🎄✨ *𝐇𝐀𝐏𝐏𝐘 𝐇𝐎𝐋𝐈𝐃𝐀𝐘𝐒 𝐅𝐑𝐎𝐌 𝐅𝐄𝐄-𝐗𝐌𝐃* ✨🎄  
 ╭━━━★˚☃️˚★━━━╮  
-*🎁 DEVICE CONNECTED SUCCESSFULLY 🎁*  
-╰━━━★˚🎅˚★━━━╯
+*🔥 DEVICE CONNECTED SUCCESSFULLY 🔥*  
+╰━━━★˚🩸˚★━━━╯
 
-📦 *Your Session ID is Ready!*  
-🔐 Please copy and store it securely — you'll need it to deploy your *𝐅𝐄𝐄-𝐗𝐌𝐃* bot.
-
-🎉 *𝑊𝑒 𝑊𝑖𝑠ℎ 𝑌𝑜𝑢 𝑎 𝑀𝑒𝑟𝑟𝑦 𝐶ℎ𝑟𝑖𝑠𝑡𝑚𝑎𝑠 𝑎𝑛𝑑 𝑎 𝐵𝑙𝑒𝑠𝑠𝑒𝑑 𝑁𝑒𝑤 𝑌𝑒𝑎𝑟 𝟐𝟎𝟐𝟔!* 🎊  
+📦 *𝒚𝒐𝒖𝒓 𝒔𝒆𝒔𝒔𝒊𝒐𝒏 𝒊𝒅 𝒊𝒔 𝒓𝒆𝒂𝒅𝒚!* 
+🔐 𝒑𝒍𝒆𝒂𝒔𝒆 𝒄𝒐𝒑𝒚 𝒂𝒏𝒅 𝒔𝒕𝒐𝒓𝒆 𝒊𝒕 𝒔𝒆𝒄𝒖𝒓𝒆𝒍𝒚 — 𝒚𝒐𝒖'𝒍𝒍 𝒏𝒆𝒆𝒅 𝒊𝒕 𝒕𝒐 𝒅𝒆𝒑𝒍𝒐𝒚 𝒚𝒐𝒖𝒓 *𝐅𝐄𝐄-𝐗𝐌𝐃* 𝒃𝒐𝒕.
 
 🌟 *Let the celebration begin with FEE-XMD power!*
 
@@ -167,15 +164,17 @@ router.get('/', async (req, res) => {
 
 📌 *Need Assistance? Reach Out Anytime:*  
 • 👑 *Owner:* https://wa.me/255752593977  
-• 💬 *Group Chat:* https://chat.whatsapp.com/KERPI5K0w0L9rzU00QSw40  
+• 💬 *Group Chat:* https://chat.whatsapp.com/FA1GPSjfUQLCyFbquWnRIS  
 • 📢 *Channel:* https://whatsapp.com/channel/0029Vb6mzVF7tkj42VNPrZ3V  
-• 📸 *Instagram:* https://www.instagram.com/frediezra  
-• 💻 *GitHub Repo:* https://github.com/Fred1e/Fred1e
+• 📸 *Instagram:* https://www.instagram.com/frediezra
+• 👤 *Facebook:* https://www.facebook.com/FrediEzra
+• 🔔 *TikTok:* https://www.tiktok.com/frediezra1
+• 💻 *GitHub Repo:* https://github.com/Fred1e/Fee-Xmd
 
 🧠 *Support FEE-XMD Project:*  
 ⭐ Star & 🍴 Fork the repo to stay updated with new features!
 
-🎄 *#MerryChristmas | #HappyNewYear2026 | #FEEBot*
+🩷 *#Thanks | #FrediAI2026 | #FEEBot*
 `;
 
                         await sock.sendMessage(sock.user.id, { text: infoMessage }, { quoted: sentSession });
