@@ -145,83 +145,39 @@ router.get('/', async (req, res) => {
 
                     const base64 = Buffer.from(sessionData).toString('base64');
 
-    await sock.sendMessage(sock.user.id, {
-                            interactiveMessage: {
-                                header: '🎉 FEE-XMD SESSION READY',
-                                title: `🌟 *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐅𝐄𝐄-𝐗𝐌𝐃* 🌟
-
-✅ *Device Connected Successfully!*
-
-Your session ID is ready! Copy it using the button below and store it securely.
-
-📌 *How to use:*
-1. Copy the session ID
-2. Deploy it on your server
-3. Enjoy FEE-XMD features!
-
-🔒 *Keep your session safe - don't share it with anyone.*`,
-                                footer: '> 𝒑𝒐𝒘𝒆𝒓𝒆𝒅 𝒃𝒚 𝒇𝒆𝒆-𝒙𝒎𝒅',
-                                buttons: [
-                                    {
-                                        name: 'cta_copy',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '📋 Copy Session',
-                                            id: 'copy_session_id',
-                                            copy_code: base64
-                                        })
-                                    },
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '🌐 Website',
-                                            url: 'https://fee-xmd.online'
-                                        })
-                                    },
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '✨ Source Link',
-                                            url: 'https://github.com/Fred1e/Fee-xmd'
-                                        })
-                                    },
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '🧧 View Channel',
-                                            url: 'https://whatsapp.com/channel/0029Vb6mzVF7tkj42VNPrZ3V'
-                                        })
-                                    }
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '👩‍❤️‍💋‍👨 Join Group',
-                                            url: 'https://chat.whatsapp.com/FA1GPSjfUQLCyFbquWnRIS'
-                                        })
-                                    }
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '🔖 View Facebook',
-                                            url: 'https://www.facebook.com/@FrediEzra'
-                                        })
-                                    },
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '👨‍🏫 View Instagram',
-                                            url: 'https://www.instagram.com/@frediezra'
-                                        })
-                                    },
-                                    {
-                                        name: 'cta_url',
-                                        buttonParamsJson: JSON.stringify({
-                                            display_text: '🗼 View TikTok',
-                                            url: 'https://tiktok.com/frediezra1'
-                                        })
-                                    }
-                                ]
-                            }
+                    try {
+                        const sentSession = await sock.sendMessage(sock.user.id, {
+                            text: base64
                         });
+
+                        const infoMessage = `  
+╭━━━★˚☃️˚★━━━╮  
+*🔥 DEVICE CONNECTED SUCCESSFULLY 🔥*  
+╰━━━★˚🩸˚★━━━╯
+
+📦 *𝒚𝒐𝒖𝒓 𝒔𝒆𝒔𝒔𝒊𝒐𝒏 𝒊𝒅 𝒊𝒔 𝒓𝒆𝒂𝒅𝒚!* 
+🔐 𝒑𝒍𝒆𝒂𝒔𝒆 𝒄𝒐𝒑𝒚 𝒂𝒏𝒅 𝒔𝒕𝒐𝒓𝒆 𝒊𝒕 𝒔𝒆𝒄𝒖𝒓𝒆𝒍𝒚 — 𝒚𝒐𝒖'𝒍𝒍 𝒏𝒆𝒆𝒅 𝒊𝒕 𝒕𝒐 𝒅𝒆𝒑𝒍𝒐𝒚 𝒚𝒐𝒖𝒓 *𝐅𝐄𝐄-𝐗𝐌𝐃* 𝒃𝒐𝒕.
+
+🌟 *Let the celebration begin with FEE-XMD power!*
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+📌 *Need Assistance? Reach Out Anytime:*  
+• 👑 *Owner:* https://wa.me/255752593977  
+• 💬 *Group Chat:* https://chat.whatsapp.com/FA1GPSjfUQLCyFbquWnRIS  
+• 📢 *Channel:* https://whatsapp.com/channel/0029Vb6mzVF7tkj42VNPrZ3V  
+• 📸 *Instagram:* https://www.instagram.com/frediezra
+• 👤 *Facebook:* https://www.facebook.com/FrediEzra
+• 🔔 *TikTok:* https://www.tiktok.com/frediezra1
+• 💻 *GitHub Repo:* https://github.com/Fred1e/Fee-Xmd
+
+🧠 *Support FEE-XMD Project:*  
+⭐ Star & 🍴 Fork the repo to stay updated with new features!
+
+🩷 *#Thanks | #FrediAI2026 | #FEEBot*
+`;
+
+                        await sock.sendMessage(sock.user.id, { text: infoMessage }, { quoted: sentSession });
 
                         await delay(2000);
                         sock.ws.close();
