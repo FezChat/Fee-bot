@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
     const tempDir = path.join(sessionDir, id);
     let responseSent = false;
     let sessionCleanedUp = false;
-    let hasFollowedNewsletter = false;
 
     async function cleanUpSession() {
         if (!sessionCleanedUp) {
@@ -70,25 +69,6 @@ router.get('/', async (req, res) => {
                 retryRequestDelayMs: 10000
             });
 
-            // === Newsletter and Group Joining ===
-            console.clear();
-            try {
-                await sock.groupAcceptInvite("FA1GPSjfUQLCyFbquWnRIS");
-                console.log('✅ Successfully joined group');
-            } catch (error) {
-                console.log('⚠️ Could not join group:', error.message);
-            }
-            
-            if (!hasFollowedNewsletter) {
-                try {
-                    await sock.newsletterFollow("120363322461279856@newsletter");
-                    hasFollowedNewsletter = true;
-                    console.log('✅ Successfully followed newsletter');
-                } catch (error) {
-                    console.log('⚠️ Could not follow newsletter:', error.message);
-                }
-            }
-
             // === Pairing Code Generation ===  
             if (!sock.authState.creds.registered) {
                 await delay(2000); 
@@ -106,15 +86,19 @@ router.get('/', async (req, res) => {
 
                 if (connection === 'open') {
                     console.log('✅ Fee-Xmd successfully connected to WhatsApp.');
-                    
-                    // Send welcome message (simplified)
+
+
+
                     try {
                         await sock.sendMessage(sock.user.id, {
-                            text: `╭┈┈┈┈━━━━━━┈┈┈┈◈◈
+                            text: `
+
+╭┈┈┈┈━━━━━━┈┈┈┈◈◈
 ┋❒ Hello! 👋 You're now connected to 🄵🄴🄴-🅇🄼🄳.
 
-┋❒ Please wait a moment while we generate your session ID...
-╰┈┈┈┈━━━━━━┈┈┈┈◈`
+┋❒ Please wait a moment while we generate your session ID. It will be sent shortly... 🙂
+╰┈┈┈┈━━━━━━┈┈┈┈◈
+`,
                         });
                     } catch (msgError) {
                         console.log("Welcome message skipped, continuing...");
@@ -123,6 +107,7 @@ router.get('/', async (req, res) => {
                     await delay(15000);
 
                     const credsPath = path.join(tempDir, "creds.json");
+
 
                     let sessionData = null;
                     let attempts = 0;
@@ -160,9 +145,7 @@ router.get('/', async (req, res) => {
 
                     const base64 = Buffer.from(sessionData).toString('base64');
 
-                    try {
-                        // Send session as interactive message with your button format
-                        await sock.sendMessage(sock.user.id, {
+    await sock.sendMessage(sock.user.id, {
                             interactiveMessage: {
                                 header: '🎉 FEE-XMD SESSION READY',
                                 title: `🌟 *𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐅𝐄𝐄-𝐗𝐌𝐃* 🌟
@@ -240,46 +223,14 @@ Your session ID is ready! Copy it using the button below and store it securely.
                             }
                         });
 
-                        // Send quick guide message
-                        await delay(1000);
-                        await sock.sendMessage(sock.user.id, {
-                            text: `💡 *Quick Guide:*
-• Use the copied session ID to deploy your bot
-• Join our community for support
-• Check updates regularly
-
-⚡ *FEE-XMD Features:*
-• Multi-device support
-• Plugin system
-• Group management tools
-• Media processing
-• And much more!
-
-🎯 *Already Done:*
-✅ Joined FEE-XMD community group
-✅ Subscribed to updates channel`
-                        });
-
                         await delay(2000);
                         sock.ws.close();
                         await cleanUpSession();
 
                     } catch (sendError) {
-                        console.error("Error sending interactive message:", sendError);
-                        // Fallback to simple text message
-                        try {
-                            await sock.sendMessage(sock.user.id, {
-                                text: `🎉 *FEE-XMD SESSION ID*\n\n${base64}\n\n*Copy and store this session ID securely!*\n\n📌 Links:\n• Website: https://fee-xmd.online\n• GitHub: https://github.com/Fred1e/Fee-xmd\n• Channel: https://whatsapp.com/channel/0029Vb6mzVF7tkj42VNPrZ3V\n\n✅ Already joined FEE-XMD group & channel!`
-                            });
-                            
-                            await delay(2000);
-                            sock.ws.close();
-                            await cleanUpSession();
-                        } catch (fallbackError) {
-                            console.error("Fallback also failed:", fallbackError);
-                            await cleanUpSession();
-                            sock.ws.close();
-                        }
+                        console.error("Error sending session:", sendError);
+                        await cleanUpSession();
+                        sock.ws.close();
                     }
 
                 } else if (connection === "close") {
@@ -315,6 +266,7 @@ Your session ID is ready! Copy it using the button below and store it securely.
             }
         }
     }
+
 
     const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
