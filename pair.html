@@ -1098,7 +1098,7 @@
       if (cleanNumber.startsWith("255")) {
         formattedNumber = `+${cleanNumber}`;
       } else {
-        formattedNumber = `+254${cleanNumber}`;
+        formattedNumber = `+${cleanNumber}`;
       }
       
       phoneInput.value = formattedNumber;
