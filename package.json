@@ -4,9 +4,9 @@
   "description": "FEE XMD WhatsApp Bot with Advanced Pairing System",
   "main": "fredi.js",
   "engines": {
-    "npm": ">=9.7.2",
-    "node": ">=20.0.0"
-  },
+  "npm": "9.8.1",
+  "node": "20.x"
+},
   "scripts": {
     "start": "node fredi.js"
   },
